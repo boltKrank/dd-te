@@ -41,6 +41,7 @@ class Revhash {
         return "Decrypted hash is: " + hashDecrypter;
 
     }
+    
 
     public static void main(String[] args) {
 
@@ -48,14 +49,34 @@ class Revhash {
 
         // get hash, change character at position
         // password length shows position, first letter of password is correct character
-        if(args[0].length() != 32){
-            System.out.println("Hash is wrong length");
-            System.exit(0);
+
+        //Check usage:
+        System.out.println(args.length);
+
+        if(args.length == 2 && args[0].equals("encrypt")){
+            if(args[1].length() != 32){
+                System.out.println("Hash is wrong length");
+                System.exit(0);
+            }
+
+            Revhash rh = new Revhash();
+            System.out.println(rh.revHashEncrypt(args[1]));        
+
+        }
+        else if(args.length == 3 && args[0].equals("decrypt")){
+            if(args[1].length() != 32){
+                System.out.println("Hash is wrong length");
+                System.exit(0);
+            }
+
+            Revhash rh = new Revhash();
+            System.out.println(rh.revHashDecrypt(args[1],args[2]));        
         }
         else {
-            Revhash rh = new Revhash();
-            System.out.println(rh.revHashEncrypt(args[0]));            
-        }       
+            // Print usage
+            System.out.println("Usage:  Revhash < encrpt | decrypt> hash [password]");
+            System.out.println("Password is needed for decrypt");
+        }
 
     }
 
